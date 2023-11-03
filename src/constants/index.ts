@@ -12,32 +12,11 @@ import { DetailsData } from "../screens/Details";
  
  const { width, height } = Dimensions.get("window");
  
- /**
-  * extending app local storage
-  * @constant USER_FIRST_LAUNCH default value
-  */
- export const USER_FIRST_LAUNCH: string = "@FIRST_TIME_LAUNCH";
- 
- 
- 
- /**
-  * extending app global custom header style object
-  * @constant GLOBAL_HEADER_STYLE default value
-  */
- export const GLOBAL_HEADER_STYLE: object = {
-   elevation: 0,
-   shadowRadius: 0,
-   shadowOpacity: 0,
-   shadowOffset: { height: 0, width: 0 },
- };
  
 
  export const CACHE_KEY: string = `@REDUX_LOCAL_PERSISTANCE_KEY`;
  export const CACHE_VERSION: number = 1; // version 1
 
-
- 
- 
  /**
   * extending app global constants
   * @constant DEVICE_FULL_HEIGHT default value

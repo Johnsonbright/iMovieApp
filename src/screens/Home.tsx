@@ -50,8 +50,6 @@ const CharacterScreen: FC<Props> = ({navigation: {navigate}}) => {
 
   const [character, setCharacter] = useState<Character[]>([]);
 
-  const [filtered, setFiltered] = useState([]);
-
   const onchange = (text: string) => {
     if (text) {
       setQuerry(text);
@@ -112,11 +110,9 @@ const CharacterScreen: FC<Props> = ({navigation: {navigate}}) => {
         data={character}
         keyExtractor={(item, index) => 'key' + index}
         numColumns={isTablet ? 2 : 1}
-        renderItem={(item: {[key: string]: any}) => {
-          return (
-            <CharacterCard item={item} onPress={() => handleClick(item)} />
-          );
-        }}
+        renderItem={(item: {[key: string]: any}) => (
+          <CharacterCard item={item} onPress={() => handleClick(item)} />
+        )}
         ListFooterComponent={ListComponent}
         onEndReached={loadMore}
         onEndReachedThreshold={0}

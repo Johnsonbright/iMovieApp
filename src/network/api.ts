@@ -15,7 +15,3 @@ try {
     
 }     
 }
-
-
-
-// export const useGetCharacters =  useInfiniteQuery
