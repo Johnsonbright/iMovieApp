@@ -17,7 +17,6 @@ import {
   HomeStackParamList,
 } from '../constants';
 import useCharacters from '../hooks/useChaacters';
-import {resetState, searchCharacters} from '../store/slice/characterSlice';
 import {Character} from '../typings/store';
 import CustomSearch from '../components/CustomSearch';
 import {store} from '../store/store';
