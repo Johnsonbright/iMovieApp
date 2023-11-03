@@ -83,7 +83,7 @@ const CharacterScreen: FC<Props> = ({navigation: {navigate}}) => {
   };
 
   const handleClick = (item: Character) => {
-    navigate(APP_SCREEN_LIST.DETAILS, {item});
+    navigate(APP_SCREEN_LIST.DETAILS, {item: item?.item});
   };
 
   const ListComponent = () => {

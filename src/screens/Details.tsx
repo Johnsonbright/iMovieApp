@@ -13,29 +13,25 @@ type DetailsProps = {
 };
 
 export type DetailsData = {
-  name: string;
-  image: string;
-  species: string;
-  gender: string;
-  status: string;
-  episode: string[];
+  name: string | undefined;
+  image: string | undefined;
+  species: string | undefined;
+  gender: string | undefined;
+  status: string | undefined;
+  episode: string[] | undefined;
 };
 
-const Details: React.FC<DetailsProps> = ({route}) => {
-  console.log('🚀 ~ file: Details.tsx:25 ~ route:', route.params);
-
-  const {name, image, species, gender, status, episode}: DetailsData =
-    route.params?.item?.item;
-
+const Details: React.FC<any> = ({route}) => {
+  const item = route.params?.item;
   return (
     <View style={{marginTop: 30}}>
       <DetailsCard
-        name={name}
-        species={species}
-        gender={gender}
-        img={image}
-        status={status}
-        episode={episode?.length}
+        name={item?.name}
+        species={item.species}
+        gender={item.gender}
+        img={item.image}
+        status={item.status}
+        episode={item.episode?.length}
       />
     </View>
   );

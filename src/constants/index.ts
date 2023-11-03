@@ -8,6 +8,7 @@
 import React from "react";
  import { Dimensions } from "react-native";
 import { Character } from "../typings/store";
+import { DetailsData } from "../screens/Details";
  
  const { width, height } = Dimensions.get("window");
  
@@ -63,5 +64,5 @@ import { Character } from "../typings/store";
 
   export type HomeStackParamList = {
     [APP_SCREEN_LIST.HOME]: undefined
-    [APP_SCREEN_LIST.DETAILS]: undefined | {item:Character} 
+    [APP_SCREEN_LIST.DETAILS]: undefined | {item:Character} | {item :DetailsData}
 }
