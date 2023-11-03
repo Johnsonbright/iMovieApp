@@ -13,6 +13,7 @@ import Indicator from '../components/Indicator';
 import {
   APP_SCREEN_LIST,
   DEVICE_FULL_HEIGHT,
+  DEVICE_FULL_WIDTH,
   HomeStackParamList,
 } from '../constants';
 import useCharacters from '../hooks/useChaacters';
@@ -38,6 +39,8 @@ const CharacterScreen: FC<Props> = ({navigation: {navigate}}) => {
 
   const dispatch = useDispatch();
 
+  const isTablet = DEVICE_FULL_WIDTH >= 600 && DEVICE_FULL_HEIGHT >= 600;
+
   const {
     characters: data,
     loading,
@@ -46,23 +49,18 @@ const CharacterScreen: FC<Props> = ({navigation: {navigate}}) => {
     fetchData,
   } = useCharacters(page);
 
-  const [character, setCharacter] = useState([]);
+  const [character, setCharacter] = useState<Character[]>([]);
 
   const [filtered, setFiltered] = useState([]);
 
   const onchange = (text: string) => {
     if (text) {
       setQuerry(text);
-      const newData = data.filter(item => {
-        const itemData = `${item?.name.toLowerCase()} `;
+      const newData: Character[] = data.filter(item => {
+        const itemData = `${item?.name ? item?.name.toLowerCase() : ''} `;
         const textData = text.toLowerCase();
-
         return itemData.indexOf(textData) > -1;
       });
-      console.log(
-        '🚀 ~ file: Home.tsx:60 ~ newData ~ newData:',
-        newData.length,
-      );
 
       setCharacter(newData);
     } else {
@@ -72,7 +70,6 @@ const CharacterScreen: FC<Props> = ({navigation: {navigate}}) => {
 
   useEffect(() => {
     setCharacter(data);
-    // dispatch(resetState());
   }, [data]);
 
   const loadMore = () => {
@@ -115,7 +112,7 @@ const CharacterScreen: FC<Props> = ({navigation: {navigate}}) => {
       <FlatList
         data={character}
         keyExtractor={(item, index) => 'key' + index}
-        numColumns={1}
+        numColumns={isTablet ? 2 : 1}
         renderItem={(item: {[key: string]: any}) => {
           return (
             <CharacterCard item={item} onPress={() => handleClick(item)} />

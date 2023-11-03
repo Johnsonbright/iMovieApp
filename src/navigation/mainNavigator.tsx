@@ -3,12 +3,12 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {APP_SCREEN_LIST} from '../constants';
 import Home from '../screens/Home';
-import Details from '../screens/Details';
+import Details from '../screens/Details'; // Importing DetailsProps type from the Details screen
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 type ScreenConfig = {
   name: string;
-  component: React.ComponentType<NativeStackScreenProps<any, any>>;
+  component: React.ComponentType<any>;
   options?: object;
   initialParams?: object;
 };
@@ -47,7 +47,7 @@ const MainNavigator = () => {
   );
 };
 
-const routes = [
+const routes: ScreenConfig[] = [
   {
     name: APP_SCREEN_LIST.HOME,
     component: Home,
@@ -55,7 +55,7 @@ const routes = [
   },
   {
     name: APP_SCREEN_LIST.DETAILS,
-    component: Details,
+    component: Details as React.ComponentType<any>, // Casting Details component
     options: {headerShown: false},
   },
 ];

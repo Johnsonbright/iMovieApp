@@ -63,5 +63,5 @@ import { Character } from "../typings/store";
 
   export type HomeStackParamList = {
     [APP_SCREEN_LIST.HOME]: undefined
-    [APP_SCREEN_LIST.DETAILS]: undefined | {item:Character}
+    [APP_SCREEN_LIST.DETAILS]: undefined | {item:Character} 
 }

@@ -12,9 +12,20 @@ type DetailsProps = {
   route: DetailsRouteProp;
 };
 
+export type DetailsData = {
+  name: string;
+  image: string;
+  species: string;
+  gender: string;
+  status: string;
+  episode: string[];
+};
+
 const Details: React.FC<DetailsProps> = ({route}) => {
-  const {name, image, species, gender, status, episode}: any =
-    route.params.item.item;
+  console.log('🚀 ~ file: Details.tsx:25 ~ route:', route.params);
+
+  const {name, image, species, gender, status, episode}: DetailsData =
+    route.params?.item?.item;
 
   return (
     <View style={{marginTop: 30}}>
