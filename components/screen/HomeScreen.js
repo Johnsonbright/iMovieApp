@@ -4,13 +4,16 @@ import {SafeAreaView} from "react-native-safe-area-context"
 import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from "react-native-heroicons/outline"
 import { styles } from '../../theme';
 import TrendingMovies from "../TrendingMovies"
+import MovieList from '../MovieList';
 
 
 
 const ios = Platform.OS == 'ios';
 
 const HomeScreen = () => {
-const [trending, setTrending] = useState([1,2,3])
+const [trending, setTrending] = useState([1,2,3]);
+const [upcoming, setUpComing] = useState([1,2,3]);
+const [topRated, setTopRated] = useState([1,2,3]);
 
   return (
     <View className=" bg-primary h-full" >
@@ -30,6 +33,9 @@ const [trending, setTrending] = useState([1,2,3])
       contentContainerStyle={{paddingBottom:10}}>
        {/* Trending movies carousel */}
      <TrendingMovies data={trending}/>
+
+     {/* upcoming movies row */}
+     <MovieList title="upcoming" data={upcoming} />
      </ScrollView>
     
     </View>
