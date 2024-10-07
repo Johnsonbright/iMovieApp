@@ -6,9 +6,11 @@ import { useNavigation } from '@react-navigation/native'
 
 let {width, height} = Dimensions.get("window")
 const TrendingMovies = ({data}) => {
-// const navigation = useNavigation(); 
-const handleClick = () => {
-  //  navigation.navigate('Movie', item);
+
+const navigation = useNavigation(); 
+
+const handleClick = (item) => {
+   navigation.navigate('Movie', item);
 }
 
   return (
@@ -16,7 +18,8 @@ const handleClick = () => {
       <Text className="text-white text-xl mx-4 mb-5">TrendingMovies</Text>
       <Carousel 
        data={data}
-       renderItem={({item}) => <MovieCard item={item} handleClick={handleClick}/>}
+       renderItem={({item}) => <MovieCard item={item} handleClick={()=> handleClick(item)}/>
+      }
        firstItem={1}
        inactiveSlideOpacity={0.60}
        sliderWidth={width}
@@ -28,7 +31,7 @@ const handleClick = () => {
   )
 }
  
-const MovieCard = ({item, handleClick}) => {
+const MovieCard = ({item, handleClick}, na) => {
   return (
     <TouchableWithoutFeedback onPress={handleClick}>
       <Image

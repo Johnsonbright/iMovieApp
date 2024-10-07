@@ -4,6 +4,6 @@ export const theme = {
 }
 
 export const styles ={
-  text : {color: theme.text},
-  background: {backgroundColor: theme.background}
+  text : theme.text,
+  background: theme.background
 }
