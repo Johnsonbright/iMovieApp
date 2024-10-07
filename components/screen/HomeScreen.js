@@ -5,6 +5,7 @@ import { Bars3CenterLeftIcon, MagnifyingGlassIcon } from "react-native-heroicons
 import { styles } from '../../theme';
 import TrendingMovies from "../TrendingMovies"
 import MovieList from '../MovieList';
+import theme  from '../../theme';
 
 
 
@@ -35,7 +36,10 @@ const [topRated, setTopRated] = useState([1,2,3]);
      <TrendingMovies data={trending}/>
 
      {/* upcoming movies row */}
-     <MovieList title="upcoming" data={upcoming} />
+     <MovieList title="Upcoming" data={upcoming} />
+
+     {/* top rated movies row */}
+     <MovieList title="Top Rated" data={topRated} />
      </ScrollView>
     
     </View>
