@@ -1,9 +1,10 @@
-import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, Dimensions, Platform } from 'react-native'
+import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, Dimensions, Platform, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { ChevronLeftIcon } from 'react-native-heroicons/outline';
 import { HeartIcon } from 'react-native-heroicons/solid';
 import { styles, theme } from '../../theme';
+import {LinearGradient}  from "react-native-linear-gradient";
 
 let{width, height} = Dimensions.get("window")
 const ios = Platform.OS == 'ios';
@@ -24,14 +25,33 @@ export default function MovieScreen() {
   >
    {/* back button and movie poster */}
    <View className="w-full" >
-    <SafeAreaView className={"relative z-20 w-full  flex-row justify-between items-center px-4" + topMargin}> 
-    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.background} className=" p-1.5 " >
-      <ChevronLeftIcon size="28" strokeWidth={2.5} color="white" />
+     <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4 flex-1" + topMargin}> 
+      <TouchableOpacity onPress={() => navigation.goBack()} color={{backgroundColor: "#dbd823"}} className=" p-1.5 " >
+       <ChevronLeftIcon size="28" strokeWidth={2.5} color="white" />
     </TouchableOpacity>
     <TouchableOpacity onPress={()=> toggleFavourite(!isFavourite)}>
-      <HeartIcon size="35" color={isFavourite? theme.background : "white"}/>
+      <HeartIcon size="35" color={isFavourite? theme.text : "white"}/>
     </TouchableOpacity>
     </SafeAreaView>
+     <View>
+       <Image 
+         source={require("../assets/images/AntMan.jpeg")}
+         style={{width, height:height*0.55}}
+       />
+     
+     <LinearGradient
+        // Background Linear Gradient
+        colors={['transparent', 'rgba(23, 23, 23, 0.5)', 'rgba(23, 23, 23, 1)']}
+        style={{width, height: height*0.40}}
+        start={{x:0.5, y:0}}
+        end={{x:0.5, y:1}}
+        className="absolute bottom-0"
+        />
+
+    
+      
+      
+     </View>
    </View>
   </ScrollView>
   )
