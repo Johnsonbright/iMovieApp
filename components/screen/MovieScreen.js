@@ -14,6 +14,7 @@ export default function MovieScreen() {
   const {params: item} = useRoute();
   const [isFavourite, toggleFavourite] = useState(false)
   const navigation = useNavigation();
+  let movieName = 'Ant-man and the wasp Quantumania';
  useEffect(()=> {
     //  call the movie details api
  }, [item])
@@ -47,11 +48,12 @@ export default function MovieScreen() {
         end={{x:0.5, y:1}}
         className="absolute bottom-0"
         />
-
-    
-      
-      
      </View>
+   </View>
+   {/* movie details */}
+   <View style={{marginTop: -(height*0.09)}} className="space-y-3">
+     {/* title */}
+     <Text className="text-white text-center text-3xl font-bold tracking-video">{movieName}</Text>
    </View>
   </ScrollView>
   )
