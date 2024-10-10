@@ -6,6 +6,7 @@ import { HeartIcon } from 'react-native-heroicons/solid';
 import { styles, theme } from '../../theme';
 import {LinearGradient}  from "react-native-linear-gradient";
 import Cast from '../Cast';
+import MovieList from '../MovieList';
 
 let{width, height} = Dimensions.get("window")
 const ios = Platform.OS == 'ios';
@@ -15,7 +16,8 @@ export default function MovieScreen() {
   const {params: item} = useRoute();
   const [isFavourite, toggleFavourite] = useState(false)
   const navigation = useNavigation();
- const [cast, setCast] = useState([1,2,3,4])
+  const [cast, setCast] = useState([1,2,3,4])
+  const [similarMovies, setSimilarMovies] = useState([1,2,3,4])
 
   let movieName = 'Ant-man and the wasp Quantumania';
  useEffect(()=> {
@@ -74,7 +76,10 @@ export default function MovieScreen() {
    </View>
     {/* cast */}
 
-    <Cast cast={cast}/>
+    <Cast cast={cast} navigation={navigation}/>
+
+    {/* similar movies */}
+    <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} />
   </ScrollView>
   )
 }
