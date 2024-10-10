@@ -55,6 +55,7 @@ export default function MovieScreen() {
      {/* title */}
      <Text className="text-white text-center text-3xl font-bold tracking-video">{movieName}</Text>
    </View>
+   
   </ScrollView>
   )
 }
