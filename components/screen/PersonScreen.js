@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, Platform, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native'
+import { View, Text, Dimensions, Platform, ScrollView, TouchableOpacity, SafeAreaView, Image } from 'react-native'
 import React from 'react'
 import { ChevronLeftIcon } from 'react-native-heroicons/outline';
 import {HeartIcon} from 'react-native-heroicons/solid';
@@ -25,8 +25,23 @@ const PersonScreen = () => {
     </SafeAreaView> 
       {/* person details */}
       <View>
-          <View className="flex-row justify-center">
-              <Text> Hello</Text>
+          <View className="flex-row justify-center"
+            style={{
+                
+              // shadowColor: 'gray',
+              // shadowRadius: 40,
+              // shadowOffset: {width: 0, height: 5},
+              // shadowOpacity: 1,
+             
+            }}
+          >
+             <View className="items-center rounded-full overflow-hidden h-72 w-72 border-2 border-neutral-500">
+                <Image source={require('../assets/images/castImage1.webp')}
+                style={{height:height*0.43, width: width*0.74,
+                  
+                }}
+              />
+             </View>
           </View>
       </View>
     </ScrollView>
