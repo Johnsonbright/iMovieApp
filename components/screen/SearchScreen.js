@@ -8,7 +8,7 @@ let {width, height} = Dimensions.get('window')
 
 const SearchScreen = () => {
   const navigation= useNavigation();
-  const [results, setResults] = useState([1,2,3,4]);
+  const [results, setResults] = useState([]);
   let movieName = 'Ant-man and the wasp Quantumania';
   return (
     <SafeAreaView className="bg-neutral-800 flex-1">
@@ -26,39 +26,52 @@ const SearchScreen = () => {
            </TouchableOpacity>    
        </View>
         {/* results */}
-         <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{paddingHorizontal: 15}}
-          className='space-y-3'
-         >
-           <Text className="text-white font-semibold ml-1"> Results ({ results.length})</Text>
-           <View className='flex-row justify-between flex-wrap'>
-             {
-              results.map((item, index) => {
-                return (
-                  <TouchableWithoutFeedback
-                     key={index}
-                     onPress={()=> navigation.push('Movie', {item})}
-                  >
-                    <View className="space-y-2 mb-4">
-                    <Image
-                    className='rounded-3xl'
-                     source={require('../assets/images/AntMan.jpeg')}
-                     style={{width: width*0.44, height: height*0.3}}
-                    />
-                    <Text className="text-neutral-300 ml-1"> {
-                    movieName.length > 22 ? movieName.slice(0,22) + '...': movieName
-                    }</Text>
-                    </View>
+         {
+           results.length> 0 ? (
+            <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{paddingHorizontal: 15}}
+            className='space-y-3'
+           >
+             <Text className="text-white font-semibold ml-1"> Results ({ results.length})</Text>
+             <View className='flex-row justify-between flex-wrap'>
+               {
+                results.map((item, index) => {
+                  return (
+                    <TouchableWithoutFeedback
+                       key={index}
+                       onPress={()=> navigation.push('Movie', {item})}
+                    >
+                      <View className="space-y-2 mb-4">
+                      <Image
+                      className='rounded-3xl'
+                       source={require('../assets/images/AntMan.jpeg')}
+                       style={{width: width*0.44, height: height*0.3}}
+                      />
+                      <Text className="text-neutral-300 ml-1"> {
+                      movieName.length > 22 ? movieName.slice(0,22) + '...': movieName
+                      }</Text>
+                      </View>
+                      
+                    </TouchableWithoutFeedback>
+  
                     
-                  </TouchableWithoutFeedback>
-
-                  
-                )
-              })
-             }
-           </View>
-         </ScrollView>
+                  )
+                })
+               }
+             </View>
+           </ScrollView>
+           ): (
+             <View className="flex-row justify-center mt-20 ">
+               <Image 
+                source={require('../assets/images/movietime.jpeg')}
+                className="h-95 w-96 rounded-3xl"
+               />
+             </View>
+            
+           )
+         }
+       
     </SafeAreaView>
   )
 }
