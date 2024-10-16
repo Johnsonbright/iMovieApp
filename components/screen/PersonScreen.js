@@ -6,14 +6,17 @@ import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import MovieList from '../MovieList';
 
+
 let {width, height} = Dimensions.get('window');
 const ios = Platform.OS == 'ios';
 const verticalMargin = ios? " ": "my-3" 
 
 const PersonScreen = () => {
   const navigation = useNavigation();
+
   const [isFavourite, toggleFavourite] = useState(false);
   const [personMovies, setPersonMovies] = useState([1,2,3,4])
+
   return (
     <ScrollView className="flex-1 bg-neutral-900" contentContainerStyle={{paddingBottom:20}}>
        {/* back screen */}
@@ -45,6 +48,7 @@ const PersonScreen = () => {
               />
              </View>
           </View>
+
           <View className="mt-6">
               <Text className="text-3xl text-white font-bold text-center">
                 Keanu Reeves
@@ -88,8 +92,10 @@ const PersonScreen = () => {
                </View>
            </View>
             <View className="my-6 mx-4 space-y-2">
+
               <Text className="text-white text-lg" >Biography</Text>
               <Text className="text-neutral-400 tracking-wide" >
+
               Keanu Charles Reeves, whose first name means "cool breeze over the mountains" in Hawaiian, was born September 2, 1964 in Beirut, Lebanon. He is the son of Patric Reeves, a showgirl and costume designer, and Samuel Nowlin Reeves, a geologist. Keanu's father was born in Hawaii, of Native Hawaiian and Chinese ancestry while Keanu's mother is originally from Essex England. After his parents' marriage dissolved, Keanu moved with his mother and younger sister, Kim Reeves, to New York City, then Toronto. Stepfather #1 was Paul Aaron, a stage and film director - he and Patricia divorced within a year, after which she went on to marry (and divorce) rock promoter Robert Miller. Reeves never reconnected with his biological father. In high school, Reeves was lukewarm toward academics but took a keen interest in ice hockey (as team goalie, he earned the nickname "The Wall") and drama. He eventually dropped out of school to pursue an acting career.
 
               After a few stage gigs and a handful of made-for-TV movies, he scored a supporting role in the Rob Lowe hockey flick Youngblood (1986), which was filmed in Canada. Shortly after the production wrapped, Reeves packed his bags and headed for Hollywood. Reeves popped up on critics' radar with his performance in the dark adolescent drama, River's Edge (1986), and landed a supporting role in the Oscar-nominated Dangerous Liaisons (1988) with director Stephen Frears.
@@ -114,6 +120,7 @@ const PersonScreen = () => {
             <View>
                <MovieList title={"Movies"} hideSeeAll={true} data={personMovies}/>
             </View>
+
       </View>
     </ScrollView>
      
