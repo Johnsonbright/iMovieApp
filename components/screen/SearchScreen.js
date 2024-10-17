@@ -8,7 +8,7 @@ let {width, height} = Dimensions.get('window')
 
 const SearchScreen = () => {
   const navigation= useNavigation();
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState([1,2,3,4]);
   let movieName = 'Ant-man and the wasp Quantumania';
   return (
     <SafeAreaView className="bg-neutral-800 flex-1">
@@ -64,7 +64,7 @@ const SearchScreen = () => {
            ): (
              <View className="flex-row justify-center mt-20 ">
                <Image 
-                source={require('../assets/images/movietime.jpeg')}
+                source={require('../assets/images/movietime2.jpeg')}
                 className="h-95 w-96 rounded-3xl"
                />
              </View>
