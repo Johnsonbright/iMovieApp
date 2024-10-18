@@ -3,12 +3,14 @@ import React, {useState} from 'react'
 import { XMarkIcon } from 'react-native-heroicons/solid'
 import { useNavigation } from '@react-navigation/native'
 import { TouchableWithoutFeedback } from 'react-native'
+import Loading from '../Loading'
 
 let {width, height} = Dimensions.get('window')
 
 const SearchScreen = () => {
   const navigation= useNavigation();
   const [results, setResults] = useState([1,2,3,4]);
+  const [loading, setLoading]  = useState(true)
   let movieName = 'Ant-man and the wasp Quantumania';
   return (
     <SafeAreaView className="bg-neutral-800 flex-1">
@@ -27,6 +29,10 @@ const SearchScreen = () => {
        </View>
         {/* results */}
          {
+            loading? (
+               <Loading/>
+            ):
+
            results.length> 0 ? (
             <ScrollView
             showsVerticalScrollIndicator={false}
