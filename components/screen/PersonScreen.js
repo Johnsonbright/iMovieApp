@@ -5,6 +5,7 @@ import {HeartIcon} from 'react-native-heroicons/solid';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import MovieList from '../MovieList';
+import Loading from '../Loading';
 
 let {width, height} = Dimensions.get('window');
 const ios = Platform.OS == 'ios';
@@ -14,6 +15,7 @@ const PersonScreen = () => {
   const navigation = useNavigation();
   const [isFavourite, toggleFavourite] = useState(false);
   const [personMovies, setPersonMovies] = useState([1,2,3,4])
+  const [loading, setLoading]  = useState(false)
   return (
     <ScrollView className="flex-1 bg-neutral-900" contentContainerStyle={{paddingBottom:20}}>
        {/* back screen */}
@@ -26,7 +28,12 @@ const PersonScreen = () => {
     </TouchableOpacity>
     </SafeAreaView> 
       {/* person details */}
-      <View>
+      {
+        loading? (
+          <Loading/>
+         
+        ): (
+          <View>
           <View className="flex-row justify-center"
             style={{
                 
@@ -114,7 +121,10 @@ const PersonScreen = () => {
             <View>
                <MovieList title={"Movies"} hideSeeAll={true} data={personMovies}/>
             </View>
-      </View>
+          </View>
+        )
+      }
+     
     </ScrollView>
      
   
