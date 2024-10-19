@@ -27,7 +27,7 @@ const navigation = useNavigation();
        <StatusBar style="light"/>
        <View className="flex-row justify-between item-center mx-4 " >
         <Bars3CenterLeftIcon size="30" color="white"/>
-        <Text className="text-white text-3xl font-bold  "><Text style={{color: styles.text}} >M</Text>ovies</Text>
+        <Text className="text-white text-3xl font-bold  "><Text style={{color: styles.text}} >iM</Text>ovies</Text>
          <TouchableOpacity
           onPress={()=> navigation.navigate('Search')}
          >
