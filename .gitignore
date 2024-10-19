@@ -22,6 +22,7 @@ DerivedData
 *.xcuserstate
 ios/.xcode.env.local
 
+
 # Android/IntelliJ
 #
 build/
@@ -64,3 +65,5 @@ yarn-error.log
 
 # testing
 /coverage
+#  Ignore constants folder containing API key
+components/constants/index.js
