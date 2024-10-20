@@ -32,6 +32,7 @@ const handleClick = (item) => {
 }
  
 const MovieCard = ({item, handleClick}, na) => {
+  console.log('item.poster_path', item.poster_path)
   return (
     <TouchableWithoutFeedback onPress={handleClick}>
       <Image
