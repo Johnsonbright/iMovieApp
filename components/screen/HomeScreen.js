@@ -8,7 +8,7 @@ import MovieList from '../MovieList';
 import theme  from '../../theme';
 import { useNavigation } from '@react-navigation/native';
 import Loading from '../Loading';
-import { fetchTrendingMovies } from '../../api/moviedb';
+import { fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies } from '../../api/moviedb';
 
 
 
@@ -23,12 +23,26 @@ const navigation = useNavigation();
 
   useEffect(() => {
     getTrendingMovies()
+    getUpcomingMovies()
+    getTopRatedMovies()
   }, [])
 
   const getTrendingMovies = async () => {
     const data = await fetchTrendingMovies();
     console.log('get trending movies', data);
     if(data && data.results) setTrending(data.results);
+    setLoading(false)
+  }
+  const getUpcomingMovies = async () => {
+    const data = await fetchUpcomingMovies();
+    console.log('get trending movies', data);
+    if(data && data.results) setUpComing(data.results);
+    setLoading(false)
+  }
+  const getTopRatedMovies = async () => {
+    const data = await fetchTopRatedMovies()
+    console.log('get trending movies', data);
+    if(data && data.results) setTopRated(data.results);
     setLoading(false)
   }
   return (

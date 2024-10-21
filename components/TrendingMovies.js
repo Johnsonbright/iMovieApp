@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, TouchableWithoutFeedback, Image, Dimensio
 import React from 'react'
 import Carousel from "react-native-snap-carousel"
 import { useNavigation } from '@react-navigation/native'
+import { image500 } from '../api/moviedb'
 
 
 let {width, height} = Dimensions.get("window")
@@ -32,11 +33,10 @@ const handleClick = (item) => {
 }
  
 const MovieCard = ({item, handleClick}, na) => {
-  console.log('item.poster_path', item.poster_path)
   return (
     <TouchableWithoutFeedback onPress={handleClick}>
       <Image
-        source={require('../components/assets/images/IMovie.jpg')}
+        source={{uri: image500(item.poster_path)}}
         style={{
           width: width*0.6,
           height: height*0.4
