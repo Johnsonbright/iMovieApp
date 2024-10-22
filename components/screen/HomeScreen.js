@@ -15,9 +15,9 @@ import { fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies } from '.
 const ios = Platform.OS == 'ios';
 
 const HomeScreen = () => {
-const [trending, setTrending] = useState([1,2,3]);
-const [upcoming, setUpComing] = useState([1,2,3]);
-const [topRated, setTopRated] = useState([1,2,3]);
+const [trending, setTrending] = useState([]);
+const [upcoming, setUpComing] = useState([]);
+const [topRated, setTopRated] = useState([]);
 const [loading, setLoading]  = useState(true)
 const navigation = useNavigation();
 
@@ -28,22 +28,37 @@ const navigation = useNavigation();
   }, [])
 
   const getTrendingMovies = async () => {
-    const data = await fetchTrendingMovies();
-    console.log('get trending movies', data);
-    if(data && data.results) setTrending(data.results);
-    setLoading(false)
+    try {
+      const data = await fetchTrendingMovies();
+      // console.log('get trending movies', data);
+      if(data && data.results) setTrending(data.results);
+      setLoading(false)
+    } catch(error) {
+       console.log('error', error.message)
+    }
+   
   }
   const getUpcomingMovies = async () => {
-    const data = await fetchUpcomingMovies();
-    console.log('get trending movies', data);
+    try {
+      const data = await fetchUpcomingMovies();
+    // console.log('get upcoming movies', data);
     if(data && data.results) setUpComing(data.results);
     setLoading(false)
+    } catch(error) {
+      console.log('error', error.message)
+    }
+    
   }
   const getTopRatedMovies = async () => {
-    const data = await fetchTopRatedMovies()
-    console.log('get trending movies', data);
-    if(data && data.results) setTopRated(data.results);
-    setLoading(false)
+    try {
+      const data = await fetchTopRatedMovies()
+      // console.log('get toprated movies', data);
+      if(data && data.results) setTopRated(data.results);
+      setLoading(false)
+    } catch(error) {
+      console.log('error', error.message)
+    }
+  
   }
   return (
     <View className=" bg-primary h-full" >
@@ -67,7 +82,7 @@ const navigation = useNavigation();
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{paddingBottom:10}}>
              {/* Trending movies carousel */}
-          {trending.length>0 && <TrendingMovies data={trending}/>} 
+            {trending.length>0 && <TrendingMovies data={trending}/>} 
       
            {/* upcoming movies row */}
            <MovieList title="Upcoming" data={upcoming} />
