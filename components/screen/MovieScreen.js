@@ -7,6 +7,8 @@ import { styles, theme } from '../../theme';
 import {LinearGradient}  from "react-native-linear-gradient";
 import Cast from '../Cast';
 import MovieList from '../MovieList';
+import { fetchMovieDetails, image500 } from '../../api/moviedb';
+import Loading from '../Loading';
 
 let{width, height} = Dimensions.get("window")
 const ios = Platform.OS == 'ios';
@@ -18,11 +20,35 @@ export default function MovieScreen() {
   const navigation = useNavigation();
   const [cast, setCast] = useState([1,2,3,4])
   const [similarMovies, setSimilarMovies] = useState([1,2,3,4])
+  const [loading, setLoading] = useState(false)
+  const [movie, setMovie] = useState({})
 
   let movieName = 'Ant-man and the wasp Quantumania';
  useEffect(()=> {
-    //  call the movie details api
+  if (item && item.id) {
+    // console.log('itemid', item.id);
+    // console.log('item', item);
+    setLoading(true);
+    getMovieDetails(item?.id); 
+  } else {
+    console.log('Can'/'t find item or id')
+  }
+  
  }, [item])
+
+  const getMovieDetails = async (id) => {
+    try {
+      const data = await fetchMovieDetails(id)
+      console.log("🚀 ~ getMovieDetails ~ data:", data)
+      if(data) setMovie(data);
+      setLoading(false)
+    
+    }catch(error) {
+      console.log('Error', error.message)
+    }
+ 
+  }
+
 
   return (
   <ScrollView
@@ -31,7 +57,7 @@ export default function MovieScreen() {
   >
    {/* back button and movie poster */}
    <View className="w-full" >
-     <SafeAreaView className={"absolute z-20 w-full flex-row justify-between items-center px-4 flex-1" + topMargin}> 
+     <SafeAreaView className={"relative  w-full  flex-row justify-between items-center px-4 flex-1" + topMargin}> 
       <TouchableOpacity onPress={() => navigation.goBack()} color={{backgroundColor: "#dbd823"}} className=" p-1.5 " >
        <ChevronLeftIcon size="28" strokeWidth={2.5} color="white" />
     </TouchableOpacity>
@@ -39,13 +65,18 @@ export default function MovieScreen() {
       <HeartIcon size="35" color={isFavourite? theme.text : "white"}/>
     </TouchableOpacity>
     </SafeAreaView>
-     <View>
-       <Image 
-         source={require("../assets/images/AntMan.jpeg")}
+    {
+        loading? (
+          <Loading/>
+        ) : 
+        <View>
+      <Image 
+         source={{uri: image500(movie?.poster_path)}}
          style={{width, height:height*0.55}}
-       />
+       /> 
      
-     {/* <LinearGradient
+     {
+     /* <LinearGradient
         // Background Linear Gradient
         colors={['transparent', 'rgba(23, 23, 23, 0.5)', 'rgba(23, 23, 23, 1)']}
         style={{width, height: height*0.40}}
@@ -54,24 +85,41 @@ export default function MovieScreen() {
         className="absolute bottom-0"
         /> */}
      </View>
+      }
+     
    </View>
    {/* movie details */}
    <View style={{marginTop: -(height*0.09)}} className="space-y-3">
      {/* title */}
-     <Text className="text-white text-center text-3xl font-bold tracking-video mt-2 bg-black/50 ">{movieName}</Text>
+     <Text className="text-white text-center text-3xl font-bold tracking-video mt-2 bg-black/50 ">
+     {
+       movie?.title
+     }</Text>
+      
      {/* status, release, runtime */}
-     <Text className="text-neutral-400 font-semibold text-base text-center" >
-      Released - 2020 - 170 min
-     </Text>
+     {
+      movie?.id? (
+        <Text className="text-neutral-300 font-semibold text-base text-center" >
+        {movie?.status} - {movie?.release_date.split('-')[0]} - {movie?.runtime} min
+        </Text>
+      ): null
+     }
+    
      {/* genres */}
      <View className="flex-row justify-center mx-4 space-x-2">
-       <Text className="text-neutral-400 font-semibold text-base text-center" >Action - </Text>
-       <Text className="text-neutral-400 font-semibold text-base text-center" >Thrill - </Text>
-       <Text className="text-neutral-400 font-semibold text-base text-center" >Comedy - </Text>
+        {movie?.genres?.map((genre, index) => {
+          let showOut = index+1 != movie.genres.length
+          return (
+            <Text key={index} className="text-neutral-400 font-semibold text-base text-center" > {genre?.name} {showOut? '-': null}</Text>
+          )
+        })
+      }
+      
+      
      </View>
      {/* description */}
       <Text className="text-neutral-400 mx-4 tracking-wide" > 
-      Ant-Man and the Wasp find themselves exploring the Quantum Realm, interacting with strange new creatures and embarking on an adventure that pushes them beyond the limits of what they thought was possible.
+        {movie?.overview}
       </Text>
    </View>
     {/* cast */}
@@ -79,7 +127,7 @@ export default function MovieScreen() {
     <Cast cast={cast} navigation={navigation}/>
 
     {/* similar movies */}
-    <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} />
+    {/* <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} /> */}
   </ScrollView>
   )
 }
