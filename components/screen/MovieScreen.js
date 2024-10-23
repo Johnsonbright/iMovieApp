@@ -7,7 +7,7 @@ import { styles, theme } from '../../theme';
 import {LinearGradient}  from "react-native-linear-gradient";
 import Cast from '../Cast';
 import MovieList from '../MovieList';
-import { fetchMovieDetails, image500 } from '../../api/moviedb';
+import { fetchMovieCredits, fetchMovieDetails, fetchSimilarMovies, image500 } from '../../api/moviedb';
 import Loading from '../Loading';
 
 let{width, height} = Dimensions.get("window")
@@ -18,8 +18,8 @@ export default function MovieScreen() {
   const {params: item} = useRoute();
   const [isFavourite, toggleFavourite] = useState(false)
   const navigation = useNavigation();
-  const [cast, setCast] = useState([1,2,3,4])
-  const [similarMovies, setSimilarMovies] = useState([1,2,3,4])
+  const [cast, setCast] = useState([])
+  const [similarMovies, setSimilarMovies] = useState([])
   const [loading, setLoading] = useState(false)
   const [movie, setMovie] = useState({})
 
@@ -30,6 +30,8 @@ export default function MovieScreen() {
     // console.log('item', item);
     setLoading(true);
     getMovieDetails(item?.id); 
+    getMovieCredit(item?.id);
+    getSimilarMovies(item?.id);
   } else {
     console.log('Can'/'t find item or id')
   }
@@ -47,6 +49,28 @@ export default function MovieScreen() {
       console.log('Error', error.message)
     }
  
+  }
+  const getMovieCredit = async (id) => {
+    try {
+      const data = await fetchMovieCredits(id)
+      console.log("🚀 ~ getMovieCredit ~ data:", data)
+       if(data && data.cast) setCast(data.cast)
+       setLoading(false)
+    
+    }catch(error) {
+      console.log('Error', error.message)
+    }
+  }
+  const getSimilarMovies = async (id) => {
+    try {
+      const data = await fetchSimilarMovies(id)
+      console.log("🚀 ~ getSimilar ~ data:", data)
+       if(data && data.results) setSimilarMovies(data.results)
+       setLoading(false)
+    
+    }catch(error) {
+      console.log('Error', error.message)
+    }
   }
 
 
@@ -98,7 +122,7 @@ export default function MovieScreen() {
       
      {/* status, release, runtime */}
      {
-      movie?.id? (
+        movie?.id? (
         <Text className="text-neutral-300 font-semibold text-base text-center" >
         {movie?.status} - {movie?.release_date.split('-')[0]} - {movie?.runtime} min
         </Text>
@@ -110,7 +134,7 @@ export default function MovieScreen() {
         {movie?.genres?.map((genre, index) => {
           let showOut = index+1 != movie.genres.length
           return (
-            <Text key={index} className="text-neutral-400 font-semibold text-base text-center" > {genre?.name} {showOut? '-': null}</Text>
+            <Text key={index} className="text-neutral-400 font-semibold text-base text-center" > {genre?.name} {showOut? '-': ''}</Text>
           )
         })
       }
@@ -127,7 +151,7 @@ export default function MovieScreen() {
     <Cast cast={cast} navigation={navigation}/>
 
     {/* similar movies */}
-    {/* <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} /> */}
+     <MovieList title="Similar Movies" hideSeeAll={true} data={similarMovies} /> 
   </ScrollView>
   )
 }
