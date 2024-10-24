@@ -8,6 +8,7 @@ import MovieList from '../MovieList';
 import Loading from '../Loading';
 import {  fetchPersonDetails, image342, image500 } from '../../api/moviedb';
 
+
 let {width, height} = Dimensions.get('window');
 const ios = Platform.OS == 'ios';
 const verticalMargin = ios? " ": "my-3" 
@@ -15,6 +16,7 @@ const verticalMargin = ios? " ": "my-3"
 const PersonScreen = () => {
   const {params: item} = useRoute();
   const navigation = useNavigation();
+
   const [isFavourite, toggleFavourite] = useState(false);
   const [personMovies, setPersonMovies] = useState([]);
   const [person, setPerson] = useState({});
@@ -35,6 +37,8 @@ const PersonScreen = () => {
     }
    
   }
+
+
 
   return (
     <ScrollView className="flex-1 bg-neutral-900" contentContainerStyle={{paddingBottom:20}}>
@@ -66,6 +70,7 @@ const PersonScreen = () => {
               />
              </View>
           </View>
+
           <View className="mt-6">
               <Text className="text-3xl text-white font-bold text-center">
                {person.name}
@@ -111,8 +116,10 @@ const PersonScreen = () => {
                </View>
            </View>
             <View className="my-6 mx-4 space-y-2">
+
               <Text className="text-white text-lg" >Biography</Text>
               <Text className="text-neutral-400 tracking-wide" >
+
               {person.biography}
             </Text>
             </View>
@@ -121,8 +128,16 @@ const PersonScreen = () => {
             <View>
                {/* <MovieList title={"Movies"} hideSeeAll={true} data={personMovies}/> */}
             </View>
+
           </View>
     
+        )
+      }
+     
+
+
+      </View>
+
     </ScrollView>
      
   
