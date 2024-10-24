@@ -41,7 +41,7 @@ export default function MovieScreen() {
   const getMovieDetails = async (id) => {
     try {
       const data = await fetchMovieDetails(id)
-      console.log("🚀 ~ getMovieDetails ~ data:", data)
+      console.log("🚀 ~ getMovieDetails ~ data:", data.poster_path)
       if(data) setMovie(data);
       setLoading(false)
     
@@ -53,7 +53,6 @@ export default function MovieScreen() {
   const getMovieCredit = async (id) => {
     try {
       const data = await fetchMovieCredits(id)
-      console.log("🚀 ~ getMovieCredit ~ data:", data)
        if(data && data.cast) setCast(data.cast)
        setLoading(false)
     
@@ -64,7 +63,6 @@ export default function MovieScreen() {
   const getSimilarMovies = async (id) => {
     try {
       const data = await fetchSimilarMovies(id)
-      console.log("🚀 ~ getSimilar ~ data:", data)
        if(data && data.results) setSimilarMovies(data.results)
        setLoading(false)
     
