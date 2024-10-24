@@ -3,8 +3,7 @@ import React from 'react'
 import { image185 } from '../api/moviedb';
 
 const Cast = ({cast, navigation}) => {
-  let personName = 'Keanu Reaves';
-  let characterName = 'John Wick'
+
 
   return (
     <View className="my-6">
@@ -20,7 +19,7 @@ const Cast = ({cast, navigation}) => {
               <TouchableOpacity
                 key={index}
                 className="mr-4 items-center"
-                onPress={() => navigation.navigate('Person', {person})}
+                onPress={() => navigation.navigate('Person', person)}
               >
                 <View
                  className="overflow-hidden rounded-full h-20 w-20 items-center border border-neutral-500"
