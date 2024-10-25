@@ -33,8 +33,8 @@ const apiCall = async(endpoint, params) => {
       const response = await axios.request(options);
       return response.data
     } catch(error) {
-      console,log('error', error);
-      return{}
+      // console.log('error', error);
+      return error?.response?.data
     }
 }
 

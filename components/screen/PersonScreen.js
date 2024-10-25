@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import MovieList from '../MovieList';
 import Loading from '../Loading';
-import {  fetchPersonDetails, image342, image500 } from '../../api/moviedb';
+import {  fetchPersonDetails, fetchPersonMovies, image342} from '../../api/moviedb';
 
 let {width, height} = Dimensions.get('window');
 const ios = Platform.OS == 'ios';
@@ -22,18 +22,32 @@ const PersonScreen = () => {
   useEffect(() => {
      setLoading(true)
      getPersonDetails(item.id)
+     getPersonMovies(item.id)
      
   }, [item])
+     
 
   const getPersonDetails = async (id) => {
     try {
       const data = await fetchPersonDetails(id);
-      console.log("🚀 ~ getPersonDetails ~  data:",  data)
+      // console.log("🚀 ~ getPersonDetails ~  data:",  data)
       if(data) setPerson(data)
     }catch(error) {
       console.log('Error', error.message);
     }
    
+    // 07083388126
+  }
+  const getPersonMovies = async (id) => {
+    console.log("🚀 ~ getPersonMovies ~ id:", id)
+    try {
+      const data = await fetchPersonMovies(id);
+      console.log("🚀 ~ getPersonMovies ~ data ", data )
+      // if(data)  setPersonMovies(data)
+    } catch(error) {
+     console.log("🚀 ~ getPersonMovies ~ error///:" , error)
+   
+  }
   }
 
   return (
