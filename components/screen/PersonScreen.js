@@ -23,32 +23,31 @@ const PersonScreen = () => {
      setLoading(true)
      getPersonDetails(item.id)
      getPersonMovies(item.id)
-     
+     console.log(item.id)
   }, [item])
      
 
   const getPersonDetails = async (id) => {
     try {
       const data = await fetchPersonDetails(id);
-      // console.log("🚀 ~ getPersonDetails ~  data:",  data)
+      console.log("🚀 ~ getPersonDetails ~  data:",  data)
       if(data) setPerson(data)
     }catch(error) {
       console.log('Error', error.message);
     }
    
-    // 07083388126
   }
+
   const getPersonMovies = async (id) => {
-    console.log("🚀 ~ getPersonMovies ~ id:", id)
-    try {
-      const data = await fetchPersonMovies(id);
-      console.log("🚀 ~ getPersonMovies ~ data ", data )
-      // if(data)  setPersonMovies(data)
+    try{
+      const data = await fetchPersonMovies(id)
+      console.log("🚀 ~ getPersonMovies ~ data:", data)
+      
     } catch(error) {
-     console.log("🚀 ~ getPersonMovies ~ error///:" , error)
-   
+       console.log('Error', error.message)
+    }
   }
-  }
+
 
   return (
     <ScrollView className="flex-1 bg-neutral-900" contentContainerStyle={{paddingBottom:20}}>
