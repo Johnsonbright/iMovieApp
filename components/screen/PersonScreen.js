@@ -25,31 +25,26 @@ const PersonScreen = () => {
      setLoading(true)
      getPersonDetails(item.id)
      getPersonMovies(item.id)
-     
   }, [item])
      
 
   const getPersonDetails = async (id) => {
     try {
       const data = await fetchPersonDetails(id);
-      // console.log("🚀 ~ getPersonDetails ~  data:",  data)
       if(data) setPerson(data)
     }catch(error) {
       console.log('Error', error.message);
     }
-   
-    // 07083388126
   }
+
   const getPersonMovies = async (id) => {
-    console.log("🚀 ~ getPersonMovies ~ id:", id)
-    try {
-      const data = await fetchPersonMovies(id);
-      console.log("🚀 ~ getPersonMovies ~ data ", data )
-      // if(data)  setPersonMovies(data)
+    try{
+      const data = await fetchPersonMovies(id)
+      // console.log("🚀 ~ getPersonMovies ~ data:", data.cast)
+      if(data && data.cast) setPersonMovies(data.cast)
     } catch(error) {
-     console.log("🚀 ~ getPersonMovies ~ error///:" , error)
-   
-  }
+       console.log('Error', error?.respomse?.data)
+    }
   }
 
 
@@ -140,7 +135,7 @@ const PersonScreen = () => {
 
              {/* movies */}
             <View>
-               {/* <MovieList title={"Movies"} hideSeeAll={true} data={personMovies}/> */}
+               <MovieList title="Movies" hideSeeAll={true} data={personMovies}/>
             </View>
 
           </View>
