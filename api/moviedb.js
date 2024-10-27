@@ -15,7 +15,8 @@ const similarMoviesEndpoint = id => `${apiBaseUrl}/movie/${id}/similar?api_key=$
 // persons endpoint
 const personDetailsEndpoint = id => `${apiBaseUrl}/person/${id}?api_key=${apiKey}`
 
-const personMoviesEndpoint = id => `${apiBaseUrl}/person/${id}/movie_credits?api_keys=${apiKey}`
+const personMoviesEndpoint = id => `${apiBaseUrl}/person/${id}/movie_credits?api_key=${apiKey}`
+
 
 // /1E5baAaEse26fej7uHcjOgEE2t2.jpg
 // Image url basic from guide(TMDB)
