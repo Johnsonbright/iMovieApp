@@ -1,21 +1,27 @@
 import { View, Text, Dimensions, SafeAreaView, TextInput, TouchableOpacity, ScrollView, Image } from 'react-native'
-import React, {useState} from 'react'
+import React, {useCallback, useState} from 'react'
 import { XMarkIcon } from 'react-native-heroicons/solid'
 import { useNavigation } from '@react-navigation/native'
 import { TouchableWithoutFeedback } from 'react-native'
 import Loading from '../Loading'
+import {debounce} from 'lodash'
 
 let {width, height} = Dimensions.get('window')
 
 const SearchScreen = () => {
   const navigation= useNavigation();
   const [results, setResults] = useState([1,2,3,4]);
-  const [loading, setLoading]  = useState(true)
+  const [loading, setLoading]  = useState(false)
   let movieName = 'Ant-man and the wasp Quantumania';
+  const handleSearch = value => {
+    console.log('value', value)
+  }
+  const handleTextDebounce = useCallback(debounce(handleSearch, 4000), [])
   return (
     <SafeAreaView className="bg-neutral-800 flex-1">
        <View className='mx-4 mt-1 flex-row justify-between items-center border border-neutral-200 rounded-full'>
           <TextInput
+             onChangeText={handleTextDebounce}
              placeholder='Search Movie'
              placeholderTextColor={'lightgray'}
              className="pb-1 pl-4 text-base font-semibold  text-white tracking-wide flex-1"

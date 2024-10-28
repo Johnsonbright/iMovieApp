@@ -95,7 +95,9 @@ const PersonScreen = () => {
                  </Text>
                  <Text className="text-sm text-neutral-300">
                   {
-                   (person.gender) === 1? 'Female' : 'Male'
+                    (
+                    person.gender === 1? 'Female' : 'Male' ) || 
+                    null
                   }
                  </Text>
                </View>
@@ -104,7 +106,7 @@ const PersonScreen = () => {
                     Birthday
                  </Text>
                  <Text className="text-sm text-neutral-300">
-                   {person.birthday}
+                   {person.birthday || 'null' }
                  </Text>
                </View>
                <View className="border-r-2 border-r-neutral-400 px-2 items-center">
@@ -112,7 +114,7 @@ const PersonScreen = () => {
                     Known for
                  </Text>
                  <Text className="text-sm text-neutral-300">
-                   {person.known_for_department}
+                   {person.known_for_department || 'null'}
                  </Text>
                </View>
                <View className=" px-2 items-center">
@@ -120,7 +122,7 @@ const PersonScreen = () => {
                     Popularity
                  </Text>
                  <Text className="text-sm text-neutral-300">
-                    {person.popularity}
+                    {person.popularity || 'null'}
                  </Text>
                </View>
            </View>
@@ -129,7 +131,8 @@ const PersonScreen = () => {
               <Text className="text-white text-lg" >Biography</Text>
               <Text className="text-neutral-400 tracking-wide" >
 
-              {person.biography}
+              {person.biography || 'null'}
+
             </Text>
             </View>
 

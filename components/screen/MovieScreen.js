@@ -41,7 +41,7 @@ export default function MovieScreen() {
   const getMovieDetails = async (id) => {
     try {
       const data = await fetchMovieDetails(id)
-      console.log("🚀 ~ getMovieDetails ~ data:", data.poster_path)
+      // console.log("🚀 ~ getMovieDetails ~ data:", data.poster_path)
       if(data) setMovie(data);
       setLoading(false)
     
