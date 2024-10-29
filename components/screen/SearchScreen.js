@@ -5,18 +5,34 @@ import { useNavigation } from '@react-navigation/native'
 import { TouchableWithoutFeedback } from 'react-native'
 import Loading from '../Loading'
 import {debounce} from 'lodash'
+import { fallballImage, image342, searchMovies } from '../../api/moviedb'
+import FastImage from 'react-native-fast-image'
 
 let {width, height} = Dimensions.get('window')
 
 const SearchScreen = () => {
   const navigation= useNavigation();
-  const [results, setResults] = useState([1,2,3,4]);
+  const [results, setResults] = useState([]);
   const [loading, setLoading]  = useState(false)
   let movieName = 'Ant-man and the wasp Quantumania';
   const handleSearch = value => {
-    console.log('value', value)
+    if(value && value.length>2){
+      setLoading(true);
+      searchMovies({
+        query: value,
+        include_adult: 'false',
+        language: 'en-US',
+        page: '1'
+      }).then(data => {
+        setLoading(false);
+        if(data && data.results) setResults(data.results)
+      })
+    }else{
+      setLoading(false)
+      setResults([])
+    }
   }
-  const handleTextDebounce = useCallback(debounce(handleSearch, 4000), [])
+  const handleTextDebounce = useCallback(debounce(handleSearch, 400), [])
   return (
     <SafeAreaView className="bg-neutral-800 flex-1">
        <View className='mx-4 mt-1 flex-row justify-between items-center border border-neutral-200 rounded-full'>
@@ -52,16 +68,17 @@ const SearchScreen = () => {
                   return (
                     <TouchableWithoutFeedback
                        key={index}
-                       onPress={()=> navigation.push('Movie', {item})}
+                       onPress={()=> navigation.push('Movie', item)}
                     >
                       <View className="space-y-2 mb-4">
                       <Image
                       className='rounded-3xl'
-                       source={require('../assets/images/AntMan.jpeg')}
+                       source={{uri: image342(item.poster_path) || fallballImage
+                        }}
                        style={{width: width*0.44, height: height*0.3}}
                       />
                       <Text className="text-neutral-300 ml-1"> {
-                      movieName.length > 22 ? movieName.slice(0,22) + '...': movieName
+                      item.title.length > 22 ? item.title.slice(0,22) + '...': item.title
                       }</Text>
                       </View>
                       
@@ -74,10 +91,15 @@ const SearchScreen = () => {
              </View>
            </ScrollView>
            ): (
-             <View className="flex-row justify-center mt-20 ">
+             <View className="flex-row flex-wrap mt-20 justify-center items-center  ">
                <Image 
                 source={require('../assets/images/movietime2.jpeg')}
-                className="h-95 w-96 rounded-3xl"
+                className=" rounded-2xl"
+                style={{
+                  width:200,
+                  height:200
+                }}
+              
                />
              </View>
             
