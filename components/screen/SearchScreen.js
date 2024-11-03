@@ -73,7 +73,7 @@ const SearchScreen = () => {
                       <View className="space-y-2 mb-4">
                       <Image
                       className='rounded-3xl'
-                       source={{uri: image342(item.poster_path) || fallballImage
+                       source={{uri: image342(item.poster_path) ?? fallballImage
                         }}
                        style={{width: width*0.44, height: height*0.3}}
                       />
