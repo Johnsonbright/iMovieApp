@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { ChevronLeftIcon } from 'react-native-heroicons/outline';
 import { HeartIcon } from 'react-native-heroicons/solid';
-import { styles, theme } from '../../theme';
-import {LinearGradient}  from "react-native-linear-gradient";
 import Cast from '../Cast';
 import MovieList from '../MovieList';
 import { fetchMovieCredits, fetchMovieDetails, fetchSimilarMovies, image500 } from '../../api/moviedb';
