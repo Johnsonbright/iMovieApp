@@ -21,7 +21,7 @@ export default function MovieScreen() {
   const [loading, setLoading] = useState(false)
   const [movie, setMovie] = useState({})
 
-  let movieName = 'Ant-man and the wasp Quantumania';
+  // let movieName = 'Ant-man and the wasp Quantumania';
  useEffect(()=> {
   if (item && item.id) {
     // console.log('itemid', item.id);
