@@ -14,7 +14,7 @@ const SearchScreen = () => {
   const navigation= useNavigation();
   const [results, setResults] = useState([]);
   const [loading, setLoading]  = useState(false)
-  let movieName = 'Ant-man and the wasp Quantumania';
+  // let movieName = 'Ant-man and the wasp Quantumania';
   const handleSearch = value => {
     if(value && value.length>2){
       setLoading(true);
