@@ -78,7 +78,7 @@ const SearchScreen = () => {
                        style={{width: width*0.44, height: height*0.3}}
                       />
                       <Text className="text-neutral-300 ml-1"> {
-                      item.title.length > 22 ? item.title.slice(0,22) + '...': item.title
+                      item.title.length > 22 ? item.title.slice(0,22) + '.....': item.title
                       }</Text>
                       </View>
                       
